@@ -1,26 +1,58 @@
 ---
-title       : Test deck
-subtitle    : 
-author      : 
+title       : Project Documentation 
+subtitle    : How to predict car fuel efficiency online
+author      : Lingli Peng
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
 ---
 
-## Read-And-Delete
+## Online Prediction Application
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+- This application provides a convenient way for people to check the car fuel efficiency online
+- It applies prediction based on regression modeling 
+- It is coded using rstudio and shiny 
 
---- .class #id 
+---
 
-## Slide 2
+## How to Use the Online Application
 
-```{r, fig.height=5, fig.width=5}
-plot(1 : 10, 1 : 10)
+1. Go to https://linglipeng.shinyapps.io/DataProductProject
+2. Input values for both car weight (lb/1000) and number of cylinders
+3. The application allows minimum of 1 and maxmum of 6 when inputing car weight
+4. The provided input choices for number of cylinders are 4, 6 and 8
+5. The predicted car miles per gallon value will be automatically calculated and displayed based on the input values
+
+---
+
+## Dataset mtcars
+
+- mtcars dataset is used to build a regression model for the prediction. It comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles
+
+```{r}
+data(mtcars)
+str(mtcars)
 ```
 
+---
+
+## Prediction Example
+
+- Here is an example of prediction based on regression modeling with the mtcars dataset
+- Predictors are weight (wt) and number of cylinders (cyl)
+- Response is mileage per gallon (mpg)
+
+```{r}
+data(mtcars)
+x1 <- mtcars$wt
+x2 <- mtcars$cyl
+y <- mtcars$mpg
+lm1 <- lm(y ~ x1 + factor(x2))
+predict(lm1, newdata=data.frame(x1=3,x2=6))[[1]]
+```
+
+- The predicted mpg value is 20.12 for a car of 3000 lb and 6 cylinders

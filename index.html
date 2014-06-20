@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test deck</title>
+  <title>Project Documentation</title>
   <meta charset="utf-8">
-  <meta name="description" content="Test deck">
-  <meta name="author" content="">
+  <meta name="description" content="Project Documentation">
+  <meta name="author" content="Lingli Peng">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -32,9 +32,9 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1>Test deck</h1>
-    <h2></h2>
-    <p><br/></p>
+    <h1>Project Documentation</h1>
+    <h2>How to predict car fuel efficiency online</h2>
+    <p>Lingli Peng<br/></p>
   </hgroup>
   <article></article>  
 </slide>
@@ -43,28 +43,92 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>Online Prediction Application</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>This application provides a convenient way for people to check the car fuel efficiency online</li>
+<li>It applies prediction based on regression modeling </li>
+<li>It is coded using rstudio and shiny </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>How to Use the Online Application</h2>
   </hgroup>
   <article data-timings="">
     <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
+<li>Go to <a href="https://linglipeng.shinyapps.io/DataProductProject">https://linglipeng.shinyapps.io/DataProductProject</a></li>
+<li>Input values for both car weight (lb/1000) and number of cylinders</li>
+<li>The application allows minimum of 1 and maxmum of 6 when inputing car weight</li>
+<li>The provided input choices for number of cylinders are 4, 6 and 8</li>
+<li>The predicted car miles per gallon value will be automatically calculated and displayed based on the input values</li>
 </ol>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="class" id="id" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>Dataset mtcars</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">plot(1:10, 1:10)
+    <ul>
+<li>mtcars dataset is used to build a regression model for the prediction. It comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles</li>
+</ul>
+
+<pre><code class="r">data(mtcars)
+str(mtcars)
 </code></pre>
 
-<p><img src="assets/fig/unnamed-chunk-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Prediction Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Here is an example of prediction based on regression modeling with the mtcars dataset</li>
+<li>Predictors are weight (wt) and number of cylinders (cyl)</li>
+<li>Response is mileage per gallon (mpg)</li>
+</ul>
+
+<pre><code class="r">data(mtcars)
+x1 &lt;- mtcars$wt
+x2 &lt;- mtcars$cyl
+y &lt;- mtcars$mpg
+lm1 &lt;- lm(y ~ x1 + factor(x2))
+predict(lm1, newdata = data.frame(x1 = 3, x2 = 6))[[1]]
+</code></pre>
+
+<pre><code>## [1] 20.12
+</code></pre>
+
+<ul>
+<li>The predicted mpg value is 20.12 for a car of 3000 lb and 6 cylinders</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -76,14 +140,26 @@
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Read-And-Delete'>
+        data-slide=1 title='Online Prediction Application'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 2'>
+        data-slide=2 title='How to Use the Online Application'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Dataset mtcars'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Prediction Example'>
+         4
       </a>
     </li>
   </ul>
